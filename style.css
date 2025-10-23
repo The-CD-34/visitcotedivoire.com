@@ -1,0 +1,297 @@
+/* Styles de base */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+  animation: gradientBG 15s ease infinite;
+}
+
+/* Animation du background */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Header avec animation */
+header {
+  background: linear-gradient(45deg, #ff8c00, #ffa500, #ff4500);
+  background-size: 200% 200%;
+  animation: headerGradient 10s ease infinite;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes headerGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+header h1 {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 3em;
+  transform: translateY(0);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Container avec effet hover */
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Titres avec animation */
+h2 {
+  color: #ff8c00;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(to right, #ff8c00, #ffa500);
+  animation: lineWidth 0.5s ease forwards;
+}
+
+@keyframes lineWidth {
+  to {
+    width: 100%;
+  }
+}
+
+/* Liste avec animation */
+li {
+  position: relative;
+  padding: 10px 0 10px 30px;
+  transition: all 0.3s ease;
+}
+
+li::before {
+  content: "►";
+  position: absolute;
+  left: 0;
+  color: #ff8c00;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.3s ease;
+}
+
+li:hover {
+  transform: translateX(10px);
+}
+
+li:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Images avec effet zoom */
+img {
+  max-width: 100%;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 2em;
+  }
+}
+
+/* Animation de chargement de page */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container > * {
+  animation: fadeIn 0.5s ease forwards;
+  opacity: 0;
+}
+
+.container > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.container > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.container > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.container > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.container > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+/* Styles spécifiques pour l'image dans le header (map / photo) */
+header {
+  position: relative;
+} /* nécessaire pour certains effets */
+
+header > img {
+  display: inline-block;
+  width: 180px;
+  max-width: 18vw;
+  min-width: 100px;
+  height: auto;
+  border-radius: 14px;
+  border: 4px solid rgba(255, 140, 0, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22),
+    0 2px 8px rgba(255, 140, 0, 0.06) inset;
+  transform-origin: center;
+  transition: transform 420ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    box-shadow 300ms ease, filter 300ms ease;
+  animation: mapFloat 6s ease-in-out infinite, mapHue 12s linear infinite;
+  cursor: pointer;
+  will-change: transform, filter;
+}
+
+/* léger flottement (ken-burns style) */
+@keyframes mapFloat {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  40% {
+    transform: translateY(-8px) rotate(-0.6deg) scale(1.02);
+  }
+  70% {
+    transform: translateY(-4px) rotate(0.4deg) scale(1.01);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+/* subtile variation de teinte / saturation pour vie */
+@keyframes mapHue {
+  0% {
+    filter: saturate(1) hue-rotate(0deg);
+  }
+  50% {
+    filter: saturate(1.06) hue-rotate(6deg);
+  }
+  100% {
+    filter: saturate(1) hue-rotate(0deg);
+  }
+}
+
+/* Hover / focus - interaction visible et accessible */
+header > img:hover,
+header > img:focus {
+  transform: translateY(-14px) scale(1.08) rotate(-1.2deg);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.36),
+    0 6px 18px rgba(255, 165, 0, 0.1) inset;
+  filter: saturate(1.12) contrast(1.05);
+  outline: none;
+}
+
+/* focus-visible pour clavier */
+header > img:focus-visible {
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.36), 0 0 0 4px rgba(255, 165, 0, 0.16);
+  border-color: rgba(255, 140, 0, 0.28);
+}
+
+/* petite lueur animée autour de l'image (pseudo-élément sur le header, centré approximativement) */
+header::after {
+  content: "";
+  position: absolute;
+  left: calc(50% + 120px); /* ajuster si nécessaire selon mise en page */
+  top: 32px;
+  width: 220px;
+  height: 220px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 165, 0, 0.12),
+    rgba(255, 140, 0, 0.06) 35%,
+    transparent 60%
+  );
+  filter: blur(18px);
+  pointer-events: none;
+  opacity: 0.9;
+  transition: opacity 300ms ease, transform 400ms ease;
+}
+
+/* réduire effet sur petit écran pour éviter chevauchement */
+@media (max-width: 720px) {
+  header > img {
+    width: 140px;
+    max-width: 34vw;
+  }
+  header::after {
+    display: none;
+  }
+}
+
+/* respect des préférences de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  header > img,
+  header::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
